@@ -1,0 +1,22 @@
+{% extends 'pizza_constructor/layout.html' %}
+
+{% block content %}
+<form>
+<h2>Тесто</h2>
+    <div>
+        <input type="radio" id="white_choice"
+         name="contact" value="white">
+        <label for="white_choice">Белое</label>
+
+        <input type="radio" id="black_choice"
+         name="contact" value="black">
+        <label for="black_choice">Черное</label>
+    </div>
+    {% for category in categories %}
+        <h2>category.name</h2>
+        {% for ingredient in categories.ingredients %}
+            <input type="number" id="{{ingredient.id}}"><label for="{{ingredient.id}}"></label><
+        {% endfor %}
+    {% endfor %}
+</form>
+{% endblock %}
