@@ -1,8 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
+{% load static %}
+<html>
 <head>
     <meta charset="UTF-8">
-    <title>Pizza app | {{title}}</title>
+    <title>Pizza app | {{ title }}</title>
+    <link rel="stylesheet" href="{% static 'css/constructor.css' %}">
 </head>
 <body>
     {% block content %}

@@ -5,18 +5,23 @@
 <h2>Тесто</h2>
     <div>
         <input type="radio" id="white_choice"
-         name="contact" value="white">
+         name="dough_type" value="white" checked>
         <label for="white_choice">Белое</label>
 
         <input type="radio" id="black_choice"
-         name="contact" value="black">
+         name="dough_type" value="black">
         <label for="black_choice">Черное</label>
     </div>
-    {% for category in categories %}
-        <h2>category.name</h2>
-        {% for ingredient in categories.ingredients %}
-            <input type="number" id="{{ingredient.id}}"><label for="{{ingredient.id}}"></label><
+    {% for group in ingredient_groups %}
+    {% if group.ingredients.all %}
+    <div>
+        <h2>{{group.name}}</h2>
+        {% for ingredient in group.ingredients.all %}
+            <label class="label-top" for="{{ingredient.id}}">{{ingredient.name}} ({{ingredient.price|floatformat}}$)</label>
+            <input type="number" id="{{ingredient.id}}">
         {% endfor %}
+    </div>
+    {% endif %}
     {% endfor %}
 </form>
 {% endblock %}
