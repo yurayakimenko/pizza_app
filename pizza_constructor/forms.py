@@ -2,8 +2,8 @@ from django import forms
 from .models import Order
 
 
-class PostForm(forms.ModelForm):
+class OrderIngredientsForm(forms.ModelForm):
 
     class Meta:
-        model = Post
-        fields = ('title', 'text',)
+        model = Order
+        fields = ('dough_type', 'text',)

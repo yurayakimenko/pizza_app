@@ -2,6 +2,6 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.pizza_constructor_page, name='constructor_page'),
-    # path('contacts', views., name='constructor_page'),
+    path('', views.constructor_page, name='constructor_page'),
+    path('order/<int:pk>', views.order_page, name='order_page'),
 ]

@@ -1,7 +1,8 @@
 {% extends 'pizza_constructor/layout.html' %}
 
 {% block content %}
-<form>
+<form method="POST" action="">
+{% csrf_token %}
 <h2>Тесто</h2>
     <div>
         <input type="radio" id="white_choice"
@@ -18,10 +19,11 @@
         <h2>{{group.name}}</h2>
         {% for ingredient in group.ingredients.all %}
             <label class="label-top" for="{{ingredient.id}}">{{ingredient.name}} ({{ingredient.price|floatformat}}$)</label>
-            <input type="number" id="{{ingredient.id}}">
+            <input type="number" id="{{ingredient.id}}" name="ingredient_amount_{{ingredient.id}}">
         {% endfor %}
     </div>
     {% endif %}
     {% endfor %}
+    <input type="submit" value="Оформить заказ">
 </form>
 {% endblock %}

@@ -27,5 +27,20 @@ class Order(models.Model):
     name = models.CharField(max_length=100)
     amount = models.FloatField()
     confirmed = models.BooleanField(default=False)
-
     objects = models.Manager()
+
+
+class OrderIngredient(models.Model):
+    order = models.ForeignKey(Order,
+                              on_delete=models.CASCADE)
+    ingredient = models.ForeignKey(Ingredient,
+                                   on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1)
+
+    def __init__(self, order, ingredient, quantity):
+        self.order = order
+        self.ingredient = ingredient
+        self.quantity = quantity
+
+    class Meta:
+        unique_together = ('order', 'ingredient')
