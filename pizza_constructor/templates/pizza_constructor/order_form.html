@@ -7,7 +7,7 @@
         <li>Тесто: {{ order.dough_type_string }}</li>
         {% for order_ingredient in order.ingredients.all %}
         <li>{{ order_ingredient.ingredient.name }} | {{order_ingredient.quantity}} шт.
-            | {{ order_ingredient.price }}$
+            | {{ order_ingredient.price|floatformat }}$
         </li>
         {% endfor %}
     </ul>

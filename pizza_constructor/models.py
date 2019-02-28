@@ -26,7 +26,6 @@ class Order(models.Model):
     email = models.EmailField("Ваш email")
     phone = models.CharField("Ваш номер телефона", max_length=20)
     name = models.CharField("Ваше имя", max_length=100)
-    amount = models.FloatField("Сумма заказа: ", default=0)
     confirmed = models.BooleanField(default=False)
     objects = models.Manager()
 

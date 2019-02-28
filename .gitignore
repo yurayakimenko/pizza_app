@@ -9,6 +9,9 @@ __pycache__/
 # idea stuff
 .idea/
 
+# secrets
+secret.py
+
 # Distribution / packaging
 .Python
 build/

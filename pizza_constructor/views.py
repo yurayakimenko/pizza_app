@@ -3,6 +3,8 @@ from .models import IngredientGroup, Order, OrderIngredient, Ingredient
 from django.template import RequestContext
 from django.views.decorators.csrf import csrf_protect
 from .forms import OrderForm
+from django.conf import settings
+from django.core.mail import send_mail
 
 
 @csrf_protect
@@ -16,8 +18,10 @@ def constructor_page(request):
                 order.save()
             elif 'ingredient_amount' in key:
                 ingredient = Ingredient.objects.get(id=int(key.split('ingredient_amount_')[1]))
-                OrderIngredient.objects.create(order=order, ingredient=ingredient,
-                                               quantity=int(value))
+                quantity = int(value)
+                if quantity > 0:
+                    OrderIngredient.objects.create(order=order, ingredient=ingredient,
+                                                   quantity=quantity)
         return redirect('order_page', pk=order.pk)
     else:
         ingredient_groups = IngredientGroup.objects.all()
@@ -34,6 +38,14 @@ def order_page(request, pk):
         if form.is_valid():
             order = form.save(commit=False)
             order.save()
+        email_text = "Вы оформили заказ пиццы №{} на сумму {}$".format(order.pk, order.price)
+        send_mail(
+            'Новый заказ №{}'.format(order.pk),
+            email_text,
+            settings.DEFAULT_FROM_EMAIL,
+            [order.email],
+            fail_silently=False,
+        )
         return redirect('order_page', pk=order.pk)
     else:
         order_form = OrderForm()
