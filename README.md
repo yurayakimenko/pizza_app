@@ -26,7 +26,7 @@ $ source venv/bin/activate
 $ pip install -r requirements.txt
 
 Before running the server you should provide Gmail secrets to `pizza_app/secrets.py`:
-```python
+```sh
 EMAIL_HOST_USER = "example@gmail.com"
 EMAIL_HOST_PASSWORD = "password"
 EMAIL_ENABLE = True
