@@ -1,10 +1,23 @@
 {% extends 'pizza_constructor/layout.html' %}
 
 {% block content %}
-    {% for field in form %}
-        <div class="fieldWrapper">
-            {{ field.errors }}
-            {{ field.label_tag }} {{ field }}
-        </div>
-    {% endfor %}
+    <h1>Заказ №{{order.pk}}</h1>
+    <h2>Вы заказали пиццу на сумму {{order.price|floatformat}}$ с такой начинкой:</h2>
+    <ul>
+        <li>Тесто: {{ order.dough_type_string }}</li>
+        {% for order_ingredient in order.ingredients.all %}
+        <li>{{ order_ingredient.ingredient.name }} | {{order_ingredient.quantity}} шт.
+            | {{ order_ingredient.price }}$
+        </li>
+        {% endfor %}
+    </ul>
+    {% if not order.email %}
+    <h2>Заполните данные для оформления заказа:</h2>
+    <form method="POST" action="/order/{{order.pk}}">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Заказать</button>
+    </form>
+    {% else %}
+    <h2>Ваш заказ отправлен, ожидайте!</h2>
+    {% endif %}
 {% endblock %}
