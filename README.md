@@ -27,6 +27,7 @@ EMAIL_HOST_PASSWORD = "password"
 Then you can
 ```
 $ python manage.py migrate
+$ python manage.py createsuperuser
 $ python manage.py runserver
 ```
 
