@@ -4,6 +4,11 @@
 
 You can view a working version of this app
 [here](http://104.248.137.143:8000).
+Credentials for `/admin`:
+```
+login: root
+password: 1q2w3e4r5t6y
+```
 Running this app on your local machine in development will work as
 well.
 
