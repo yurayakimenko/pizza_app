@@ -38,6 +38,9 @@ EMAIL_HOST_PASSWORD = "password"
 EMAIL_ENABLE = True
 ```
 
+Also you should let [less secure apps](https://support.google.com/accounts/answer/6010255?hl=en)
+access your account.
+
 Then you can:
 ```
 $ python manage.py migrate
