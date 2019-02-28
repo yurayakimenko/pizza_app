@@ -59,5 +59,6 @@ def order_page(request, pk):
         order_form = OrderForm()
         return render(request, 'pizza_constructor/order_form.html',
                       {"form": order_form,
-                       "order": order})
+                       "order": order,
+                       "title": "Заказ №{}".format(order.pk)})
 
