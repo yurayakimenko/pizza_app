@@ -31,22 +31,29 @@ $ source venv/bin/activate
 $ pip install -r requirements.txt
 ```
 
-Before running the server you should provide Gmail secrets to `pizza_app/secrets.py`:
+Before running the server you should provide Gmail secrets 
+to `pizza_app/secrets.py`:
 ```python
 EMAIL_HOST_USER = "example@gmail.com"
 EMAIL_HOST_PASSWORD = "password"
 EMAIL_ENABLE = True
 ```
 
-Also you should let [less secure apps](https://support.google.com/accounts/answer/6010255?hl=en)
+Also you should let [less secure 
+apps](https://support.google.com/accounts/answer/6010255?hl=en)
 access your account.
 
 Then you can:
-```
+```sh
 $ python manage.py migrate
+$ python manage.py init_db
 $ python manage.py createsuperuser
 $ python manage.py runserver
 ```
+
+`init_db` will create custom ingredient's groups and ingredients itself 
+with random prices. You can change names in 
+`pizza_constructor/management/commands/init_db.py`
 
 Then visit `http://localhost:8000` to view the app.
 
