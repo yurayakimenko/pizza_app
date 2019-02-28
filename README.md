@@ -3,7 +3,7 @@
 **This project is written with Django 2.1.7.**
 
 You can view a working version of this app
-[here](http://104.248.137.143:8000).
+[here](http://193.124.176.237:8000).
 Credentials for `/admin`:
 ```
 login: root
