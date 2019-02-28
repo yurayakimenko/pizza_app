@@ -5,6 +5,7 @@ from django.views.decorators.csrf import csrf_protect
 from .forms import OrderForm
 from django.conf import settings
 from django.core.mail import send_mail
+from typing import List
 
 
 @csrf_protect
@@ -38,14 +39,21 @@ def order_page(request, pk):
         if form.is_valid():
             order = form.save(commit=False)
             order.save()
-        email_text = "Вы оформили заказ пиццы №{} на сумму {}$".format(order.pk, order.price)
-        send_mail(
-            'Новый заказ №{}'.format(order.pk),
-            email_text,
-            settings.DEFAULT_FROM_EMAIL,
-            [order.email],
-            fail_silently=False,
-        )
+        if settings.EMAIL_ENABLE:
+            email_text = "Вы оформили заказ пиццы №{} на имя {}\n\n" \
+                         "Тесто: {}".format(order.pk, order.name, order.dough_type_string)
+            order_ingredients: List[OrderIngredient] = order.__getattribute__("ingredients").all()
+            for order_ingredient in order_ingredients:
+                email_text += "\n- {} ({} шт.)".format(order_ingredient.ingredient.name,
+                                                       order_ingredient.quantity)
+            email_text += "\n\nСумма к оплате: {}$".format(order.price)
+            send_mail(
+                'Ваш заказ пиццы №{}'.format(order.pk),
+                email_text,
+                settings.DEFAULT_FROM_EMAIL,
+                [order.email],
+                fail_silently=False,
+            )
         return redirect('order_page', pk=order.pk)
     else:
         order_form = OrderForm()
