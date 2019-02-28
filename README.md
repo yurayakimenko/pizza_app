@@ -9,7 +9,14 @@ well.
 
 ## Building
 
-It is best to use the python `virtualenv` tool to build locally:
+You can simply run:
+```sh
+$ git clone https://github.com/yurayakimenko/pizza_app.git
+$ cd pizza_app
+$ ./deploy.sh
+```
+
+Or do it hard way:
 
 ```sh
 $ git clone https://github.com/yurayakimenko/pizza_app.git
@@ -18,13 +25,14 @@ $ virtualenv venv
 $ source venv/bin/activate
 $ pip install -r requirements.txt
 
-Before running the server you should provide Gmail secrets to `pizza_app/secrets.py`
-```
+Before running the server you should provide Gmail secrets to `pizza_app/secrets.py`:
+```python
 EMAIL_HOST_USER = "example@gmail.com"
 EMAIL_HOST_PASSWORD = "password"
+EMAIL_ENABLE = True
 ```
 
-Then you can
+Then you can:
 ```
 $ python manage.py migrate
 $ python manage.py createsuperuser
